@@ -1,8 +1,42 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Layout from '../../components/layout/Layout'
+import axios from 'axios'
+import { baseUrl } from '../../config'
 
 const SingleBlog = () => {
+    const {id} = useParams()
+    const [blog,setBlog] = useState({});
+     const navigate = useNavigate()
+
+    const deleteBlog = async() =>{
+        try {
+            const response = await axios.delete(`${baseUrl}/blog/${id}`,{
+            headers:{
+              'Authorization' : localStorage.getItem('token')
+            }
+        })
+        if (response === 200){
+            navigate('/')
+        }
+        else{
+            alert("something went wrong")
+        }
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
+
+
+    const fetchBlog = async() => {
+        const response = await axios.get(`${baseUrl}/blog/${id}`)
+        if(response === 200){
+            setBlog(response.data.data)
+        }
+    }
+    useEffect(() => {
+     fetchBlog();
+  }, [])
   return (
     <Layout>
         <div className="bg-gray-100 dark:bg-gray-800 py-8 h-screen">
@@ -19,30 +53,30 @@ const SingleBlog = () => {
                        </Link>
                     </div>
                     <div className="w-1/2 px-2">
-                        <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">Delete</button>
+                        <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600" onClick={deleteBlog}>Delete</button>
                     </div>
                 </div>
             </div>
             <div className="md:flex-1 px-4">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Blog Title</h2>
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{blog?.title}</h2>
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                    Historical Place - The Dharara
+                    {blog?.subtitle}
                 </p>
                 <div className="flex mb-4">
                     <div className="mr-4">
                         <span className="font-bold text-gray-700 dark:text-gray-300">category:</span>
-                        <span className="text-gray-600 dark:text-gray-300">$29.99</span>
+                        <span className="text-gray-600 dark:text-gray-300">${blog?.category}</span>
                     </div>
                     <div>
-                        <span className="font-bold text-gray-700 dark:text-gray-300">Published At:</span>
-                        <span className="text-gray-600 dark:text-gray-300"> Jan 09, 2003</span>
+                        <span className="font-bold text-gray-700 dark:text-gray-300">Author:{blog?.userId?.username}</span>
+                      
                     </div>
                 </div>
               
-                <div>
+                <div>   
                     <span className="font-bold text-gray-700 dark:text-gray-300">Description:</span>
                     <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                    Dharahara (Nepali: धरहरा), was a nine storey building in Nepal. It was 61.88 metres (203.0 ft) tall.[1] It was at the center of Sundhara in Kathmandu. It was built by Bhimsen Thapa in 1832. The tower was destroyed by the 25 April 2015 Nepal earthquake.
+                {blog?.description}
                     </p>
                 </div>
             </div>

@@ -13,6 +13,9 @@ const Login = () => {
       const response = await axios.post(baseUrl + "/login", data)
       //console.log(response);
       if (response.status === 200) {
+
+        //localstorage vanne vada ma  token vanne room ma response.data.token  value
+        localStorage.setItem('token',response.data.token)
         navigate('/');
       } else {
         alert("Login Failed");

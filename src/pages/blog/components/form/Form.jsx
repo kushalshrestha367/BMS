@@ -4,7 +4,8 @@ const Form = ({ type, onSubmit }) => {
 	const [data, setData] = useState({
 		title: '',
 		subtitle: '',
-		description: '',
+		description: '', 		 
+		category:'',
 		image: ''
 	})
 	const handleChange = (e) => {
@@ -18,7 +19,7 @@ const Form = ({ type, onSubmit }) => {
 		e.preventDefault();
 		onSubmit(data);
 	}
-	console.log(data);
+	// console.log(data);
 
 	return (
 		<div className="flex justify-center items-center w-screen  bg-white">
@@ -33,19 +34,19 @@ const Form = ({ type, onSubmit }) => {
 						<div className="grid grid-cols-1 gap-5 md:grid-cols-2 mt-2">
 							<input className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
 								type="text" placeholder="Title*" name='title' onChange={handleChange} required />
-							<input className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-								type="text" placeholder="Subtitle*" name='subtitle' onChange={handleChange} required />
+								<input className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+									type="text" placeholder="Subtitle*" name='subtitle' onChange={handleChange} required />
 							<input className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
 								type="file" name='image' onChange={handleChange} />
 							<input className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
 								type="text" placeholder="category*" name='category' onChange={handleChange} required />
 						</div>
 						<div className="my-4">
-							<textarea onChange={handleChange} required placeholder="Description*" className="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
+							<textarea onChange={handleChange} required placeholder="description" className="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
 						</div>
 						<div className="my-2 w-1/2 lg:w-1/4">
-							<button className="uppercase text-sm font-bold tracking-wide bg-blue-900 text-gray-100 p-3 rounded-lg w-full 
-                      focus:outline-none focus:shadow-outline">
+							<button className="uppercase text-sm font-bold tracking-wide bg-blue-900 hover:bg-green-400 text-gray-100 p-3 rounded-lg w-full 
+                      focus:outline-none focus:shadow-outline" >
 								Submit
 							</button>
 						</div>
