@@ -22,7 +22,7 @@ const Home = () => {
     {
       blogs.length > 0 && blogs.map((blog) => {
         return(
-          <Card blog={blog} />
+          <Card key={blog._id} blog={blog} />
         )
       })
     }

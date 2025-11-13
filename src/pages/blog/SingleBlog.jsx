@@ -16,7 +16,7 @@ const SingleBlog = () => {
               'Authorization' : localStorage.getItem('token')
             }
         })
-        if (response === 200){
+        if (response.status === 200){
             navigate('/')
         }
         else{
@@ -30,7 +30,7 @@ const SingleBlog = () => {
 
     const fetchBlog = async() => {
         const response = await axios.get(`${baseUrl}/blog/${id}`)
-        if(response === 200){
+        if(response.status === 200){
             setBlog(response.data.data)
         }
     }

@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 const Form = ({ type, onSubmit }) => {
 	const [data, setData] = useState({
 		title: '',
-		subtitle: '',
-		description: '', 		 
+		subtitle: '',	
+		description: '', 	 
 		category:'',
 		image: ''
 	})
@@ -42,7 +42,7 @@ const Form = ({ type, onSubmit }) => {
 								type="text" placeholder="category*" name='category' onChange={handleChange} required />
 						</div>
 						<div className="my-4">
-							<textarea onChange={handleChange} required placeholder="description" className="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
+							<textarea name="description" onChange={handleChange} required placeholder="description" className="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
 						</div>
 						<div className="my-2 w-1/2 lg:w-1/4">
 							<button className="uppercase text-sm font-bold tracking-wide bg-blue-900 hover:bg-green-400 text-gray-100 p-3 rounded-lg w-full 
